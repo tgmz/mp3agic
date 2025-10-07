@@ -1076,6 +1076,7 @@ public class ID3WrapperTest {
 	//region ID3v2TagForTesting class
 	private static class ID3v2TagForTesting extends ID3v1TagForTesting implements ID3v2 {
 		private String composer;
+		private String conductor;
 		private String originalArtist;
 		private String albumArtist;
 		private String copyright;
@@ -1166,6 +1167,16 @@ public class ID3WrapperTest {
 			this.composer = composer;
 		}
 
+
+		@Override
+		public String getConductor() {
+			return conductor;
+		}
+
+		@Override
+		public void setConductor(String conductor) {
+			this.conductor = conductor;
+		}
 		@Override
 		public String getPublisher() {
 			return null;

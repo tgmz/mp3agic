@@ -37,6 +37,10 @@ public interface ID3v2 extends ID3v1 {
 
 	void setComposer(String composer);
 
+	String getConductor();
+
+	void setConductor(String conductor);
+
 	String getPublisher();
 
 	void setPublisher(String publisher);

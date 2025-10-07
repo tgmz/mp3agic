@@ -31,6 +31,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public static final String ID_KEY = "TKEY";
 	public static final String ID_ARTIST = "TPE1";
 	public static final String ID_ALBUM_ARTIST = "TPE2";
+	public static final String ID_CONDUCTOR = "TPE3";
 	public static final String ID_TRACK = "TRCK";
 	public static final String ID_PART_OF_SET = "TPOS";
 	public static final String ID_COMPILATION = "TCMP";
@@ -55,6 +56,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public static final String ID_KEY_OBSELETE = "TKE";
 	public static final String ID_ARTIST_OBSELETE = "TP1";
 	public static final String ID_ALBUM_ARTIST_OBSELETE = "TP2";
+	public static final String ID_CONDUCTOR_OBSELETE = "TPE3";
 	public static final String ID_TRACK_OBSELETE = "TRK";
 	public static final String ID_PART_OF_SET_OBSELETE = "TPA";
 	public static final String ID_COMPILATION_OBSELETE = "TCP";
@@ -1004,6 +1006,22 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 					addFrame(createFrame(ID_CHAPTER_TOC, ct.toBytes()), false);
 				}
 			}
+		}
+	}
+
+	@Override
+	public String getConductor() {
+		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_CONDUCTOR_OBSELETE : ID_CONDUCTOR);
+		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
+		return null;
+	}
+
+	@Override
+	public void setConductor(String conductor) {
+		if (conductor != null && conductor.length() > 0) {
+			invalidateDataLength();
+			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(conductor));
+			addFrame(createFrame(ID_CONDUCTOR, frameData.toBytes()), true);
 		}
 	}
 

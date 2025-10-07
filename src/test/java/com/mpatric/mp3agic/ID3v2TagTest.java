@@ -353,6 +353,7 @@ public class ID3v2TagTest {
 		assertEquals("\u4E2D\u6587", id3tag.getTitle()); // chinese
 		assertEquals("\u3053\u3093\u306B\u3061\u306F", id3tag.getAlbum()); // japanese
 		assertEquals("\u0AB9\u0AC7\u0AB2\u0ACD\u0AB2\u0ACB", id3tag.getComposer()); // gujarati
+		assertEquals("\u5C0F\u6FA4 \u5F81\u723E", id3tag.getConductor()); // japanese: Seiji Ozawa
 	}
 
 	@Test
