@@ -138,25 +138,89 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.5.4</version>
 			</plugin>
-
-			<!-- code coverage -->
-			<plugin>
-				<groupId>org.eluder.coveralls</groupId>
-				<artifactId>coveralls-maven-plugin</artifactId>
-				<version>4.3.0</version>
-			</plugin>
-
-			<!-- needed by coveralls -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<format>xml</format>
-					<maxmem>256m</maxmem>
-					<check />
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>cc</id>
+			<properties>
+				<!-- Properties to enable jacoco code coverage analysis -->
+				<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+				<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+				<sonar.coverage.jacoco.xmlReportPaths>
+					${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+			</properties>
+			<build>
+				<plugins>
+					<!-- Enabling use of jacoco -->
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>0.8.13</version>
+						<executions>
+							<execution>
+								<id>prepare-agent</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>report</id>
+								<goals>
+									<goal>report</goal>
+								</goals>
+								<phase>test</phase>
+								<configuration>
+									<formats>
+										<format>XML</format>
+									</formats>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>dc</id>
+			<properties>
+				<dependency-check.suppressionFile></dependency-check.suppressionFile>
+				<sonar.dependencyCheck.htmlReportPath>
+					${project.build.directory}/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.owasp</groupId>
+						<artifactId>dependency-check-maven</artifactId>
+						<version>12.1.6</version>
+						<configuration>
+							<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+							<centralAnalyzerEnabled>false</centralAnalyzerEnabled>
+							<!-- Make sure xinfo plugins are shipped w/o
+							vulnerabilities -->
+							<failBuildOnCVSS>0</failBuildOnCVSS>
+							<skipTestScope>true</skipTestScope>
+							<failOnError>true</failOnError>
+							<nvdApiKey>${nvdApiKey}</nvdApiKey>
+							<formats>
+								<format>HTML</format>
+							</formats>
+							<suppressionFiles>
+							</suppressionFiles>
+						</configuration>
+						<executions>
+							<execution>
+								<id>dependency-check</id>
+								<phase>package</phase>
+								<goals>
+									<goal>aggregate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
