@@ -38,7 +38,7 @@ public class ID3Wrapper {
 	}
 
 	public String getArtist() {
-		if (id3v2Tag != null && id3v2Tag.getArtist() != null && id3v2Tag.getArtist().length() > 0) {
+		if (id3v2Tag != null && id3v2Tag.getArtist() != null && !id3v2Tag.getArtist().isEmpty()) {
 			return id3v2Tag.getArtist();
 		} else if (id3v1Tag != null) {
 			return id3v1Tag.getArtist();
@@ -57,7 +57,7 @@ public class ID3Wrapper {
 	}
 
 	public String getTitle() {
-		if (id3v2Tag != null && id3v2Tag.getTitle() != null && id3v2Tag.getTitle().length() > 0) {
+		if (id3v2Tag != null && id3v2Tag.getTitle() != null && !id3v2Tag.getTitle().isEmpty()) {
 			return id3v2Tag.getTitle();
 		} else if (id3v1Tag != null) {
 			return id3v1Tag.getTitle();
@@ -76,7 +76,7 @@ public class ID3Wrapper {
 	}
 
 	public String getAlbum() {
-		if (id3v2Tag != null && id3v2Tag.getAlbum() != null && id3v2Tag.getAlbum().length() > 0) {
+		if (id3v2Tag != null && id3v2Tag.getAlbum() != null && !id3v2Tag.getAlbum().isEmpty()) {
 			return id3v2Tag.getAlbum();
 		} else if (id3v1Tag != null) {
 			return id3v1Tag.getAlbum();
@@ -95,7 +95,7 @@ public class ID3Wrapper {
 	}
 
 	public String getYear() {
-		if (id3v2Tag != null && id3v2Tag.getYear() != null && id3v2Tag.getYear().length() > 0) {
+		if (id3v2Tag != null && id3v2Tag.getYear() != null && !id3v2Tag.getYear().isEmpty()) {
 			return id3v2Tag.getYear();
 		} else if (id3v1Tag != null) {
 			return id3v1Tag.getYear();
@@ -143,7 +143,7 @@ public class ID3Wrapper {
 	}
 
 	public String getComment() {
-		if (id3v2Tag != null && id3v2Tag.getComment() != null && id3v2Tag.getComment().length() > 0) {
+		if (id3v2Tag != null && id3v2Tag.getComment() != null && !id3v2Tag.getComment().isEmpty()) {
 			return id3v2Tag.getComment();
 		} else if (id3v1Tag != null) {
 			return id3v1Tag.getComment();

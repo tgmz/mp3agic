@@ -104,7 +104,7 @@ public class ID3v1Tag implements ID3v1 {
 		} else {
 			packField(bytes, comment, COMMENT_LENGTH_V1_1, COMMENT_OFFSET);
 			String trackTemp = numericsOnly(track);
-			if (trackTemp.length() > 0) {
+			if (!trackTemp.isEmpty()) {
 				int trackInt = Integer.parseInt(trackTemp);
 				if (trackInt < 128) {
 					bytes[TRACK_OFFSET] = (byte) trackInt;

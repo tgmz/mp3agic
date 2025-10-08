@@ -14,14 +14,14 @@ import static org.junit.Assert.*;
 
 public class Mp3FileTest {
 
-	private static final String fs = File.separator;
-	private static final String MP3_WITH_NO_TAGS = "src" + fs + "test" + fs + "resources" + fs + "notags.mp3";
-	private static final String MP3_WITH_ID3V1_AND_ID3V23_TAGS = "src" + fs + "test" + fs + "resources" + fs + "v1andv23tags.mp3";
-	private static final String MP3_WITH_DUMMY_START_AND_END_FRAMES = "src" + fs + "test" + fs + "resources" + fs + "dummyframes.mp3";
-	private static final String MP3_WITH_ID3V1_AND_ID3V23_AND_CUSTOM_TAGS = "src" + fs + "test" + fs + "resources" + fs + "v1andv23andcustomtags.mp3";
-	private static final String MP3_WITH_ID3V23_UNICODE_TAGS = "src" + fs + "test" + fs + "resources" + fs + "v23unicodetags.mp3";
-	private static final String NOT_AN_MP3 = "src" + fs + "test" + fs + "resources" + fs + "notanmp3.mp3";
-	private static final String MP3_WITH_INCOMPLETE_MPEG_FRAME = "src" + fs + "test" + fs + "resources" + fs + "incompletempegframe.mp3";
+	private static final String FS = File.separator;
+	private static final String MP3_WITH_NO_TAGS = "src" + FS + "test" + FS + "resources" + FS + "notags.mp3";
+	private static final String MP3_WITH_ID3V1_AND_ID3V23_TAGS = "src" + FS + "test" + FS + "resources" + FS + "v1andv23tags.mp3";
+	private static final String MP3_WITH_DUMMY_START_AND_END_FRAMES = "src" + FS + "test" + FS + "resources" + FS + "dummyframes.mp3";
+	private static final String MP3_WITH_ID3V1_AND_ID3V23_AND_CUSTOM_TAGS = "src" + FS + "test" + FS + "resources" + FS + "v1andv23andcustomtags.mp3";
+	private static final String MP3_WITH_ID3V23_UNICODE_TAGS = "src" + FS + "test" + FS + "resources" + FS + "v23unicodetags.mp3";
+	private static final String NOT_AN_MP3 = "src" + FS + "test" + FS + "resources" + FS + "notanmp3.mp3";
+	private static final String MP3_WITH_INCOMPLETE_MPEG_FRAME = "src" + FS + "test" + FS + "resources" + FS + "incompletempegframe.mp3";
 
 	@Test
 	public void shouldLoadMp3WithNoTags() throws IOException, UnsupportedTagException, InvalidDataException {

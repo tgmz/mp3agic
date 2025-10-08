@@ -23,7 +23,7 @@ public class MpegFrame {
 	public static final String MODE_EXTENSION_INTENSITY_M_S_STEREO = "Intensity & M/S stereo";
 	public static final String MODE_EXTENSION_NA = "n/a";
 	public static final String EMPHASIS_NONE = "None";
-	public static final String EMPHASIS__50_15_MS = "50/15 ms";
+	public static final String EMPHASIS_50_15_MS = "50/15 ms";
 	public static final String EMPHASIS_CCITT_J_17 = "CCITT J.17";
 
 	private static final int FRAME_DATA_LENGTH = 4;
@@ -488,7 +488,7 @@ public class MpegFrame {
 				this.emphasis = EMPHASIS_NONE;
 				break;
 			case 1:
-				this.emphasis = EMPHASIS__50_15_MS;
+				this.emphasis = EMPHASIS_50_15_MS;
 				break;
 			case 3:
 				this.emphasis = EMPHASIS_CCITT_J_17;

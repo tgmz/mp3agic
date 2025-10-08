@@ -59,9 +59,9 @@ public class EncodedText {
 	}
 
 	public EncodedText(String string) throws IllegalArgumentException {
-		for (byte textEncoding : textEncodingFallback) {
-			this.textEncoding = textEncoding;
-			value = stringToBytes(string, characterSetForTextEncoding(textEncoding));
+		for (byte te : textEncodingFallback) {
+			this.textEncoding = te;
+			value = stringToBytes(string, characterSetForTextEncoding(te));
 			if (value != null && this.toString() != null) {
 				this.stripBomAndTerminator();
 				return;

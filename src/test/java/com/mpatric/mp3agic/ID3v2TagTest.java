@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+import org.junit.Test.None;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +17,16 @@ public class ID3v2TagTest {
 	private static final byte BYTE_D = 0x44;
 	private static final byte BYTE_3 = 0x33;
 	private static final byte[] ID3V2_HEADER = {BYTE_I, BYTE_D, BYTE_3, 4, 0, 0, 0, 0, 2, 1};
-
+	
+	private static final String GREEK_ARTIST = "\u03B3\u03B5\u03B9\u03AC \u03C3\u03BF\u03C5";
+	private static final String CHINEESE_TITLE = "\u4E2D\u6587";
+	private static final String JAPANESE_ALBUM = "\u3053\u3093\u306B\u3061\u306F";
+	private static final String GUJARATI_COMPOSER = "\u0AB9\u0AC7\u0AB2\u0ACD\u0AB2\u0ACB";
+	private static final String JAPANESE_CONDUCTOR = "\u5C0F\u6FA4 \u5F81\u723E"; // Seiji Ozawa
+	private static final String CYRILLIC_ENGINEER = "\u0418\u0433\u043E\u0440\u044C \u0421\u043E\u0440\u043E\u043A\u0438\u043D"; // Igor Sorokin
+	private static final String CYRILLIC_LYRICIST = "\u042E\u0440\u0438\u0439 \u0428\u0435\u0432\u0447\u0443\u043A"; // Juri Schewtschuk
+	private static final String CYRILLIC_MIX_ARTIST = "\u0412\u0430\u0434\u0438\u043C \u041A\u0443\u0440\u044B\u043B\u0435\u0432"; // Vadim Kurylew
+	
 	@Test
 	public void shouldInitialiseFromHeaderBlockWithValidHeaders() throws NoSuchTagException, UnsupportedTagException, InvalidDataException {
 		byte[] header = BufferTools.copyBuffer(ID3V2_HEADER, 0, ID3V2_HEADER.length);
@@ -353,24 +363,28 @@ public class ID3v2TagTest {
 	public void shouldReadTagFieldsWithUnicodeDataFromMp3() throws Exception {
 		byte[] buffer = TestHelper.loadFile("src/test/resources/v23unicodetags.mp3");
 		ID3v2 id3tag = ID3v2TagFactory.createTag(buffer);
-		assertEquals("\u03B3\u03B5\u03B9\u03AC \u03C3\u03BF\u03C5", id3tag.getArtist()); // greek
-		assertEquals("\u4E2D\u6587", id3tag.getTitle()); // chinese
-		assertEquals("\u3053\u3093\u306B\u3061\u306F", id3tag.getAlbum()); // japanese
-		assertEquals("\u0AB9\u0AC7\u0AB2\u0ACD\u0AB2\u0ACB", id3tag.getComposer()); // gujarati
-		assertEquals("\u5C0F\u6FA4 \u5F81\u723E", id3tag.getConductor()); // japanese: Seiji Ozawa
-		assertEquals("\u0418\u0433\u043E\u0440\u044C \u0421\u043E\u0440\u043E\u043A\u0438\u043D", id3tag.getEngineer()); // cyrillic: Igor Sorokin 
-		assertEquals("\u042E\u0440\u0438\u0439 \u0428\u0435\u0432\u0447\u0443\u043A", id3tag.getLyricist()); // cyrillic: Juri Schewtschuk
-		assertEquals("\u0412\u0430\u0434\u0438\u043C \u041A\u0443\u0440\u044B\u043B\u0435\u0432", id3tag.getMixArtist()); // cyrillic: Vadim Kurylew
+		assertEquals(GREEK_ARTIST, id3tag.getArtist());
+		assertEquals(CHINEESE_TITLE, id3tag.getTitle());
+		assertEquals(JAPANESE_ALBUM, id3tag.getAlbum());
+		assertEquals(GUJARATI_COMPOSER, id3tag.getComposer());
+		assertEquals(JAPANESE_CONDUCTOR, id3tag.getConductor());
+		assertEquals(CYRILLIC_ENGINEER, id3tag.getEngineer()); 
+		assertEquals(CYRILLIC_LYRICIST, id3tag.getLyricist());
+		assertEquals(CYRILLIC_MIX_ARTIST, id3tag.getMixArtist());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void shouldSetTagFieldsWithUnicodeDataAndSpecifiedEncodingCorrectly() throws Exception {
 		ID3v2 id3tag = new ID3v23Tag();
-		id3tag.setArtist("\u03B3\u03B5\u03B9\u03AC \u03C3\u03BF\u03C5");
-		id3tag.setTitle("\u4E2D\u6587");
-		id3tag.setAlbum("\u3053\u3093\u306B\u3061\u306F");
+		id3tag.setArtist(GREEK_ARTIST);
+		id3tag.setTitle(CHINEESE_TITLE);
+		id3tag.setAlbum(JAPANESE_ALBUM);
 		id3tag.setComment("\u03C3\u03BF\u03C5");
-		id3tag.setComposer("\u0AB9\u0AC7\u0AB2\u0ACD\u0AB2\u0ACB");
+		id3tag.setComposer(GUJARATI_COMPOSER);
+		id3tag.setConductor(JAPANESE_CONDUCTOR);
+		id3tag.setEngineer(CYRILLIC_ENGINEER);
+		id3tag.setLyricist(CYRILLIC_LYRICIST);
+		id3tag.setMixArtist(CYRILLIC_MIX_ARTIST);
 		id3tag.setOriginalArtist("\u03B3\u03B5\u03B9\u03AC");
 		id3tag.setCopyright("\u03B3\u03B5");
 		id3tag.setUrl("URL");

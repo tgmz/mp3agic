@@ -2,11 +2,11 @@ package com.mpatric.mp3agic;
 
 public class ID3v22Tag extends AbstractID3v2Tag {
 
-	public static final String VERSION = "2.0";
+	public static final String VERSION_3_0 = "2.0";
 
 	public ID3v22Tag() {
 		super();
-		version = VERSION;
+		version = VERSION_3_0;
 	}
 
 	public ID3v22Tag(byte[] buffer) throws NoSuchTagException, UnsupportedTagException, InvalidDataException {

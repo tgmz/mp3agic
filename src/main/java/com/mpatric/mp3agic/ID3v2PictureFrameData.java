@@ -58,7 +58,7 @@ public class ID3v2PictureFrameData extends AbstractID3v2FrameData {
 		if (description != null) bytes[0] = description.getTextEncoding();
 		else bytes[0] = 0;
 		int mimeTypeLength = 0;
-		if (mimeType != null && mimeType.length() > 0) {
+		if (mimeType != null && !mimeType.isEmpty()) {
 			mimeTypeLength = mimeType.length();
 			try {
 				BufferTools.stringIntoByteBuffer(mimeType, 0, mimeTypeLength, bytes, 1);

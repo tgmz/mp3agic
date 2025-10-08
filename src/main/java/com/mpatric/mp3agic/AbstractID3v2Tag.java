@@ -3,6 +3,8 @@ package com.mpatric.mp3agic;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
+
 public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	public static final String ID_IMAGE = "APIC";
@@ -402,7 +404,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setTrack(String track) {
-		if (track != null && track.length() > 0) {
+		if (StringUtils.isNotEmpty(track)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(track));
 			addFrame(createFrame(ID_TRACK, frameData.toBytes()), true);
@@ -418,7 +420,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setPartOfSet(String partOfSet) {
-		if (partOfSet != null && partOfSet.length() > 0) {
+		if (StringUtils.isNotEmpty(partOfSet)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(partOfSet));
 			addFrame(createFrame(ID_PART_OF_SET, frameData.toBytes()), true);
@@ -449,7 +451,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setGrouping(String grouping) {
-		if (grouping != null && grouping.length() > 0) {
+		if (StringUtils.isNotEmpty(grouping)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(grouping));
 			addFrame(createFrame(ID_GROUPING, frameData.toBytes()), true);
@@ -465,7 +467,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setArtist(String artist) {
-		if (artist != null && artist.length() > 0) {
+		if (StringUtils.isNotEmpty(artist)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(artist));
 			addFrame(createFrame(ID_ARTIST, frameData.toBytes()), true);
@@ -481,7 +483,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setAlbumArtist(String albumArtist) {
-		if (albumArtist != null && albumArtist.length() > 0) {
+		if (StringUtils.isNotEmpty(albumArtist)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(albumArtist));
 			addFrame(createFrame(ID_ALBUM_ARTIST, frameData.toBytes()), true);
@@ -497,7 +499,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setTitle(String title) {
-		if (title != null && title.length() > 0) {
+		if (StringUtils.isNotEmpty(title)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(title));
 			addFrame(createFrame(ID_TITLE, frameData.toBytes()), true);
@@ -513,7 +515,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setAlbum(String album) {
-		if (album != null && album.length() > 0) {
+		if (StringUtils.isNotEmpty(album)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(album));
 			addFrame(createFrame(ID_ALBUM, frameData.toBytes()), true);
@@ -529,7 +531,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setYear(String year) {
-		if (year != null && year.length() > 0) {
+		if (StringUtils.isNotEmpty(year)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(year));
 			addFrame(createFrame(ID_YEAR, frameData.toBytes()), true);
@@ -545,7 +547,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setDate(String date) {
-		if (date != null && date.length() > 0) {
+		if (StringUtils.isNotEmpty(date)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(date));
 			addFrame(createFrame(ID_DATE, frameData.toBytes()), true);
@@ -553,7 +555,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	}
 
 	private int getGenre(String text) {
-		if (text != null && text.length() > 0) {
+		if (StringUtils.isNotEmpty(text)) {
 			try {
 				return extractGenreNumber(text);
 			} catch (NumberFormatException e) { // match genre description
@@ -597,7 +599,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 			return Integer.parseInt(bpmStr);
 		} catch (NumberFormatException e) {
 			// try float as some utilities add BPM like 67.8, or 67,8
-			return (int) Float.parseFloat(bpmStr.trim().replaceAll(",", "."));
+			return (int) Float.parseFloat(bpmStr.trim().replace(",", "."));
 		}
 	}
 
@@ -621,7 +623,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setKey(String key) {
-		if (key != null && key.length() > 0) {
+		if (StringUtils.isNotEmpty(key)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(key));
 			addFrame(createFrame(ID_KEY, frameData.toBytes()), true);
@@ -641,7 +643,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 				return ID3v1Genres.GENRES[genreNum];
 			} else {
 				String description = extractGenreDescription(text);
-				if (description != null && description.length() > 0) {
+				if (StringUtils.isNotEmpty(description)) {
 					return description;
 				}
 			}
@@ -660,7 +662,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	protected int extractGenreNumber(String genreValue) throws NumberFormatException {
 		String value = genreValue.trim();
-		if (value.length() > 0) {
+		if (!value.isEmpty()) {
 			if (value.charAt(0) == '(') {
 				int pos = value.indexOf(')');
 				if (pos > 0) {
@@ -673,7 +675,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	protected String extractGenreDescription(String genreValue) throws NumberFormatException {
 		String value = genreValue.trim();
-		if (value.length() > 0) {
+		if (!value.isEmpty()) {
 			if (value.charAt(0) == '(') {
 				int pos = value.indexOf(')');
 				if (pos > 0) {
@@ -695,7 +697,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setComment(String comment) {
-		if (comment != null && comment.length() > 0) {
+		if (StringUtils.isNotEmpty(comment)) {
 			invalidateDataLength();
 			ID3v2CommentFrameData frameData = new ID3v2CommentFrameData(useFrameUnsynchronisation(), "eng", null, new EncodedText(comment));
 			addFrame(createFrame(ID_COMMENT, frameData.toBytes()), true);
@@ -711,7 +713,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setItunesComment(String itunesComment) {
-		if (itunesComment != null && itunesComment.length() > 0) {
+		if (StringUtils.isNotEmpty(itunesComment)) {
 			invalidateDataLength();
 			ID3v2CommentFrameData frameData = new ID3v2CommentFrameData(useFrameUnsynchronisation(), "eng", new EncodedText(ITUNES_COMMENT_DESCRIPTION), new EncodedText(itunesComment));
 			addFrame(createFrame(ID_COMMENT, frameData.toBytes()), true);
@@ -750,7 +752,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setLyrics(String lyrics) {
-		if (lyrics != null && lyrics.length() > 0) {
+		if (StringUtils.isNotEmpty(lyrics)) {
 			invalidateDataLength();
 			ID3v2CommentFrameData frameData = new ID3v2CommentFrameData(useFrameUnsynchronisation(), "eng", null, new EncodedText(lyrics));
 			addFrame(createFrame(ID_TEXT_LYRICS, frameData.toBytes()), true);
@@ -766,7 +768,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setComposer(String composer) {
-		if (composer != null && composer.length() > 0) {
+		if (StringUtils.isNotEmpty(composer)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(composer));
 			addFrame(createFrame(ID_COMPOSER, frameData.toBytes()), true);
@@ -782,7 +784,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setPublisher(String publisher) {
-		if (publisher != null && publisher.length() > 0) {
+		if (StringUtils.isNotEmpty(publisher)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(publisher));
 			addFrame(createFrame(ID_PUBLISHER, frameData.toBytes()), true);
@@ -798,7 +800,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setOriginalArtist(String originalArtist) {
-		if (originalArtist != null && originalArtist.length() > 0) {
+		if (StringUtils.isNotEmpty(originalArtist)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(originalArtist));
 			addFrame(createFrame(ID_ORIGINAL_ARTIST, frameData.toBytes()), true);
@@ -814,7 +816,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setCopyright(String copyright) {
-		if (copyright != null && copyright.length() > 0) {
+		if (StringUtils.isNotEmpty(copyright)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(copyright));
 			addFrame(createFrame(ID_COPYRIGHT, frameData.toBytes()), true);
@@ -830,7 +832,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setArtistUrl(String url) {
-		if (url != null && url.length() > 0) {
+		if (StringUtils.isNotEmpty(url)) {
 			invalidateDataLength();
 			ID3v2WWWFrameData frameData = new ID3v2WWWFrameData(useFrameUnsynchronisation(), url);
 			addFrame(createFrame(ID_ARTIST_URL, frameData.toBytes()), true);
@@ -846,7 +848,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setCommercialUrl(String url) {
-		if (url != null && url.length() > 0) {
+		if (StringUtils.isNotEmpty(url)) {
 			invalidateDataLength();
 			ID3v2WWWFrameData frameData = new ID3v2WWWFrameData(useFrameUnsynchronisation(), url);
 			addFrame(createFrame(ID_COMMERCIAL_URL, frameData.toBytes()), true);
@@ -862,7 +864,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setCopyrightUrl(String url) {
-		if (url != null && url.length() > 0) {
+		if (StringUtils.isNotEmpty(url)) {
 			invalidateDataLength();
 			ID3v2WWWFrameData frameData = new ID3v2WWWFrameData(useFrameUnsynchronisation(), url);
 			addFrame(createFrame(ID_COPYRIGHT_URL, frameData.toBytes()), true);
@@ -878,7 +880,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setAudiofileUrl(String url) {
-		if (url != null && url.length() > 0) {
+		if (StringUtils.isNotEmpty(url)) {
 			invalidateDataLength();
 			ID3v2WWWFrameData frameData = new ID3v2WWWFrameData(useFrameUnsynchronisation(), url);
 			addFrame(createFrame(ID_AUDIOFILE_URL, frameData.toBytes()), true);
@@ -894,7 +896,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setAudioSourceUrl(String url) {
-		if (url != null && url.length() > 0) {
+		if (StringUtils.isNotEmpty(url)) {
 			invalidateDataLength();
 			ID3v2WWWFrameData frameData = new ID3v2WWWFrameData(useFrameUnsynchronisation(), url);
 			addFrame(createFrame(ID_AUDIOSOURCE_URL, frameData.toBytes()), true);
@@ -910,7 +912,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setRadiostationUrl(String url) {
-		if (url != null && url.length() > 0) {
+		if (StringUtils.isNotEmpty(url)) {
 			invalidateDataLength();
 			ID3v2WWWFrameData frameData = new ID3v2WWWFrameData(useFrameUnsynchronisation(), url);
 			addFrame(createFrame(ID_RADIOSTATION_URL, frameData.toBytes()), true);
@@ -926,7 +928,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setPaymentUrl(String url) {
-		if (url != null && url.length() > 0) {
+		if (StringUtils.isNotEmpty(url)) {
 			invalidateDataLength();
 			ID3v2WWWFrameData frameData = new ID3v2WWWFrameData(useFrameUnsynchronisation(), url);
 			addFrame(createFrame(ID_PAYMENT_URL, frameData.toBytes()), true);
@@ -942,7 +944,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setPublisherUrl(String url) {
-		if (url != null && url.length() > 0) {
+		if (StringUtils.isNotEmpty(url)) {
 			invalidateDataLength();
 			ID3v2WWWFrameData frameData = new ID3v2WWWFrameData(useFrameUnsynchronisation(), url);
 			addFrame(createFrame(ID_PUBLISHER_URL, frameData.toBytes()), true);
@@ -958,7 +960,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setUrl(String url) {
-		if (url != null && url.length() > 0) {
+		if (StringUtils.isNotEmpty(url)) {
 			invalidateDataLength();
 			ID3v2UrlFrameData frameData = new ID3v2UrlFrameData(useFrameUnsynchronisation(), null, url);
 			addFrame(createFrame(ID_URL, frameData.toBytes()), true);
@@ -1024,7 +1026,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setConductor(String conductor) {
-		if (conductor != null && !conductor.isEmpty()) {
+		if (StringUtils.isNotEmpty(conductor)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(conductor));
 			addFrame(createFrame(ID_CONDUCTOR, frameData.toBytes()), true);
@@ -1040,7 +1042,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setMixArtist(String mixArtist) {
-		if (mixArtist != null && !mixArtist.isEmpty()) {
+		if (StringUtils.isNotEmpty(mixArtist)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(mixArtist));
 			addFrame(createFrame(ID_MIX_ARTIST, frameData.toBytes()), true);
@@ -1056,7 +1058,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setLyricist(String lyricist) {
-		if (lyricist != null && !lyricist.isEmpty()) {
+		if (StringUtils.isNotEmpty(lyricist)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(lyricist));
 			addFrame(createFrame(ID_LYRICIST, frameData.toBytes()), true);
@@ -1072,7 +1074,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setEngineer(String engineer) {
-		if (engineer != null && !engineer.isEmpty()) {
+		if (StringUtils.isNotEmpty(engineer)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(engineer));
 			addFrame(createFrame(ID_ENGINEER, frameData.toBytes()), true);
@@ -1088,7 +1090,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setEncoder(String encoder) {
-		if (encoder != null && encoder.length() > 0) {
+		if (StringUtils.isNotEmpty(encoder)) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(encoder));
 			addFrame(createFrame(ID_ENCODER, frameData.toBytes()), true);
@@ -1109,7 +1111,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setAlbumImage(byte[] albumImage, String mimeType, byte imageType, String imageDescription) {
-		if (albumImage != null && albumImage.length > 0 && mimeType != null && mimeType.length() > 0) {
+		if (albumImage != null && albumImage.length > 0 && StringUtils.isNotEmpty(mimeType)) {
 			invalidateDataLength();
 			ID3v2PictureFrameData frameData = new ID3v2PictureFrameData(
 					useFrameUnsynchronisation(), mimeType, imageType,

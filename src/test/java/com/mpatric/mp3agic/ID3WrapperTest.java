@@ -1,6 +1,7 @@
 package com.mpatric.mp3agic;
 
 import org.junit.Test;
+import org.junit.Test.None;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -120,7 +121,7 @@ public class ID3WrapperTest {
 		assertEquals("a track", id3v2Tag.getTrack());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setTrackDoesNotThrowExceptionWhenBothTagsDoNotExist() {
 		ID3Wrapper wrapper = new ID3Wrapper(null, null);
 		wrapper.setTrack("a track");
@@ -200,7 +201,7 @@ public class ID3WrapperTest {
 		assertEquals("an artist", id3v2Tag.getArtist());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setArtistDoesNotThrowExceptionWhenBothTagsDoNotExist() {
 		ID3Wrapper wrapper = new ID3Wrapper(null, null);
 		wrapper.setArtist("an artist");
@@ -280,7 +281,7 @@ public class ID3WrapperTest {
 		assertEquals("a title", id3v2Tag.getTitle());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setTitleDoesNotThrowExceptionWhenBothTagsDoNotExist() {
 		ID3Wrapper wrapper = new ID3Wrapper(null, null);
 		wrapper.setTitle("a title");
@@ -360,7 +361,7 @@ public class ID3WrapperTest {
 		assertEquals("an album", id3v2Tag.getAlbum());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setAlbumDoesNotThrowExceptionWhenBothTagsDoNotExist() {
 		ID3Wrapper wrapper = new ID3Wrapper(null, null);
 		wrapper.setAlbum("an album");
@@ -440,7 +441,7 @@ public class ID3WrapperTest {
 		assertEquals("a year", id3v2Tag.getYear());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setYearDoesNotThrowExceptionWhenBothTagsDoNotExist() {
 		ID3Wrapper wrapper = new ID3Wrapper(null, null);
 		wrapper.setYear("a year");
@@ -510,7 +511,7 @@ public class ID3WrapperTest {
 		assertEquals(22, id3v2Tag.getGenre());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setGenreDoesNotThrowExceptionWhenBothTagsDoNotExist() {
 		ID3Wrapper wrapper = new ID3Wrapper(null, null);
 		wrapper.setGenre(22);
@@ -616,7 +617,7 @@ public class ID3WrapperTest {
 		assertEquals("a comment", id3v2Tag.getComment());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setCommentDoesNotThrowExceptionWhenBothTagsDoNotExist() {
 		ID3Wrapper wrapper = new ID3Wrapper(null, null);
 		wrapper.setComment("a comment");
@@ -651,7 +652,7 @@ public class ID3WrapperTest {
 		assertEquals("a composer", id3v2Tag.getComposer());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setComposerDoesNotThrowExceptionWhenV2TagDoesNotExist() {
 		ID3v1 id3v1Tag = new ID3v1TagForTesting();
 		ID3Wrapper wrapper = new ID3Wrapper(id3v1Tag, null);
@@ -687,7 +688,7 @@ public class ID3WrapperTest {
 		assertEquals("an original artist", id3v2Tag.getOriginalArtist());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setOriginalArtistDoesNotThrowExceptionWhenV2TagDoesNotExist() {
 		ID3v1 id3v1Tag = new ID3v1TagForTesting();
 		ID3Wrapper wrapper = new ID3Wrapper(id3v1Tag, null);
@@ -723,7 +724,7 @@ public class ID3WrapperTest {
 		assertEquals("an album artist", id3v2Tag.getAlbumArtist());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setAlbumArtistDoesNotThrowExceptionWhenV2TagDoesNotExist() {
 		ID3v1 id3v1Tag = new ID3v1TagForTesting();
 		ID3Wrapper wrapper = new ID3Wrapper(id3v1Tag, null);
@@ -759,7 +760,7 @@ public class ID3WrapperTest {
 		assertEquals("a copyright", id3v2Tag.getCopyright());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setCopyrightDoesNotThrowExceptionWhenV2TagDoesNotExist() {
 		ID3v1 id3v1Tag = new ID3v1TagForTesting();
 		ID3Wrapper wrapper = new ID3Wrapper(id3v1Tag, null);
@@ -795,7 +796,7 @@ public class ID3WrapperTest {
 		assertEquals("a url", id3v2Tag.getUrl());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setUrlDoesNotThrowExceptionWhenV2TagDoesNotExist() {
 		ID3v1 id3v1Tag = new ID3v1TagForTesting();
 		ID3Wrapper wrapper = new ID3Wrapper(id3v1Tag, null);
@@ -831,7 +832,7 @@ public class ID3WrapperTest {
 		assertEquals("an encoder", id3v2Tag.getEncoder());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setEncoderDoesNotThrowExceptionWhenV2TagDoesNotExist() {
 		ID3v1 id3v1Tag = new ID3v1TagForTesting();
 		ID3Wrapper wrapper = new ID3Wrapper(id3v1Tag, null);
@@ -870,7 +871,7 @@ public class ID3WrapperTest {
 		assertEquals("mime type", id3v2Tag.getAlbumImageMimeType());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setAlbumImageDoesNotThrowExceptionWhenV2TagDoesNotExist() {
 		ID3v1 id3v1Tag = new ID3v1TagForTesting();
 		ID3Wrapper wrapper = new ID3Wrapper(id3v1Tag, null);
@@ -906,7 +907,7 @@ public class ID3WrapperTest {
 		assertEquals("lyrics", id3v2Tag.getLyrics());
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void setLyricsDoesNotThrowExceptionWhenV2TagDoesNotExist() {
 		ID3v1 id3v1Tag = new ID3v1TagForTesting();
 		ID3Wrapper wrapper = new ID3Wrapper(id3v1Tag, null);
@@ -946,7 +947,7 @@ public class ID3WrapperTest {
 		assertFalse(id3v2Tag.getFrameSets().containsKey(AbstractID3v2Tag.ID_COPYRIGHT));
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void clearCopyrightDoesNotThrowExceptionWhenV2TagDoesNotExist() {
 		ID3Wrapper wrapper = new ID3Wrapper(null, null);
 		wrapper.clearCopyright();
@@ -964,7 +965,7 @@ public class ID3WrapperTest {
 		assertFalse(id3v2Tag.getFrameSets().containsKey(AbstractID3v2Tag.ID_ENCODER));
 	}
 
-	@Test
+	@Test(expected = None.class)
 	public void clearEncoderDoesNotThrowExceptionWhenV2TagDoesNotExist() {
 		ID3Wrapper wrapper = new ID3Wrapper(null, null);
 		wrapper.clearEncoder();
@@ -1097,7 +1098,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setPadding(boolean padding) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1107,7 +1108,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setFooter(boolean footer) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1117,7 +1118,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setUnsynchronisation(boolean unsynchronisation) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1127,7 +1128,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setBPM(int bpm) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1137,7 +1138,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setGrouping(String grouping) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1147,7 +1148,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setKey(String key) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1157,7 +1158,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setDate(String date) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1187,7 +1188,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setPublisher(String publisher) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1227,7 +1228,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setArtistUrl(String url) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1237,7 +1238,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setCommercialUrl(String url) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1247,7 +1248,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setCopyrightUrl(String url) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1257,7 +1258,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setAudiofileUrl(String url) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1267,7 +1268,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setAudioSourceUrl(String url) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1277,7 +1278,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setRadiostationUrl(String url) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1287,7 +1288,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setPaymentUrl(String url) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1297,7 +1298,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setPublisherUrl(String url) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1317,7 +1318,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setPartOfSet(String partOfSet) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1327,7 +1328,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setCompilation(boolean compilation) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1337,7 +1338,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setChapters(ArrayList<ID3v2ChapterFrameData> chapters) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1347,7 +1348,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setChapterTOC(ArrayList<ID3v2ChapterTOCFrameData> ctoc) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1373,12 +1374,12 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setAlbumImage(byte[] albumImage, String mimeType, byte imageType, String imageDescription) {
-
+			// Irrelvant
 		}
 
 		@Override
 		public void clearAlbumImage() {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1393,7 +1394,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setWmpRating(int rating) {
-
+			// Irrelvant
 		}
 
 		@Override
@@ -1403,7 +1404,7 @@ public class ID3WrapperTest {
 
 		@Override
 		public void setItunesComment(String itunesComment) {
-
+			// Irrelvant
 		}
 
 		@Override

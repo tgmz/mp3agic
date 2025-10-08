@@ -52,7 +52,7 @@ public class ID3v2UrlFrameData extends AbstractID3v2FrameData {
 		} else {
 			bytes[marker++] = 0;
 		}
-		if (url != null && url.length() > 0) {
+		if (url != null && !url.isEmpty()) {
 			try {
 				BufferTools.stringIntoByteBuffer(url, 0, url.length(), bytes, marker);
 			} catch (UnsupportedEncodingException e) {

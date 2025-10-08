@@ -5,20 +5,20 @@ import java.nio.charset.StandardCharsets;
 
 public final class BufferTools {
 
-	private static final String defaultCharsetName = StandardCharsets.ISO_8859_1.name();
+	private static final String DEFAULT_CHARACTERSET_NAME = StandardCharsets.ISO_8859_1.name();
 
 	private BufferTools() {}
 
 	public static String byteBufferToStringIgnoringEncodingIssues(byte[] bytes, int offset, int length) {
 		try {
-			return byteBufferToString(bytes, offset, length, defaultCharsetName);
+			return byteBufferToString(bytes, offset, length, DEFAULT_CHARACTERSET_NAME);
 		} catch (UnsupportedEncodingException e) {
 			return null;
 		}
 	}
 
 	public static String byteBufferToString(byte[] bytes, int offset, int length) throws UnsupportedEncodingException {
-		return byteBufferToString(bytes, offset, length, defaultCharsetName);
+		return byteBufferToString(bytes, offset, length, DEFAULT_CHARACTERSET_NAME);
 	}
 
 	public static String byteBufferToString(byte[] bytes, int offset, int length, String charsetName) throws UnsupportedEncodingException {
@@ -35,7 +35,7 @@ public final class BufferTools {
 	}
 
 	public static byte[] stringToByteBuffer(String s, int offset, int length) throws UnsupportedEncodingException {
-		return stringToByteBuffer(s, offset, length, defaultCharsetName);
+		return stringToByteBuffer(s, offset, length, DEFAULT_CHARACTERSET_NAME);
 	}
 
 	public static byte[] stringToByteBuffer(String s, int offset, int length, String charsetName) throws UnsupportedEncodingException {
@@ -44,7 +44,7 @@ public final class BufferTools {
 	}
 
 	public static void stringIntoByteBuffer(String s, int offset, int length, byte[] bytes, int destOffset) throws UnsupportedEncodingException {
-		stringIntoByteBuffer(s, offset, length, bytes, destOffset, defaultCharsetName);
+		stringIntoByteBuffer(s, offset, length, bytes, destOffset, DEFAULT_CHARACTERSET_NAME);
 	}
 
 	public static void stringIntoByteBuffer(String s, int offset, int length, byte[] bytes, int destOffset, String charsetName) throws UnsupportedEncodingException {

@@ -2,13 +2,13 @@ package com.mpatric.mp3agic;
 
 public class ID3v24Tag extends AbstractID3v2Tag {
 
-	public static final String VERSION = "4.0";
+	public static final String VERSION_4_0 = "4.0";
 
 	public static final String ID_RECTIME = "TDRC";
 
 	public ID3v24Tag() {
 		super();
-		version = VERSION;
+		version = VERSION_4_0;
 	}
 
 	public ID3v24Tag(byte[] buffer) throws NoSuchTagException, UnsupportedTagException, InvalidDataException {
@@ -71,7 +71,7 @@ public class ID3v24Tag extends AbstractID3v2Tag {
 	}
 
 	public void setRecordingTime(String recTime) {
-		if (recTime != null && recTime.length() > 0) {
+		if (recTime != null && !recTime.isEmpty()) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(recTime));
 			addFrame(createFrame(ID_RECTIME, frameData.toBytes()), true);

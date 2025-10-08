@@ -32,7 +32,7 @@ public class ID3v2WWWFrameData extends AbstractID3v2FrameData {
 	@Override
 	protected byte[] packFrameData() {
 		byte[] bytes = new byte[getLength()];
-		if (url != null && url.length() > 0) {
+		if (url != null && !url.isEmpty()) {
 			try {
 				BufferTools.stringIntoByteBuffer(url, 0, url.length(), bytes, 0);
 			} catch (UnsupportedEncodingException e) {

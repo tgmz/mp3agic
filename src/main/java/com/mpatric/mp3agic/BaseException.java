@@ -1,5 +1,7 @@
 package com.mpatric.mp3agic;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class BaseException extends Exception {
 
 	private static final long serialVersionUID = 1L;
@@ -22,7 +24,7 @@ public class BaseException extends Exception {
 		while (true) {
 			s.append('[');
 			s.append(t.getClass().getName());
-			if (t.getMessage() != null && t.getMessage().length() > 0) {
+			if (StringUtils.isNotEmpty(t.getMessage())) {
 				s.append(": ");
 				s.append(t.getMessage());
 			}
