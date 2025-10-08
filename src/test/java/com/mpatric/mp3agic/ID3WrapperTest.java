@@ -1077,6 +1077,9 @@ public class ID3WrapperTest {
 	private static class ID3v2TagForTesting extends ID3v1TagForTesting implements ID3v2 {
 		private String composer;
 		private String conductor;
+		private String lyricist;
+		private String mixArtist;
+		private String engineer;
 		private String originalArtist;
 		private String albumArtist;
 		private String copyright;
@@ -1445,6 +1448,30 @@ public class ID3WrapperTest {
 		@Override
 		public void clearFrameSet(String id) {
 			frameSets.remove(id);
+		}
+
+		public String getLyricist() {
+			return lyricist;
+		}
+
+		public void setLyricist(String lyricist) {
+			this.lyricist = lyricist;
+		}
+
+		public String getMixArtist() {
+			return mixArtist;
+		}
+
+		public void setMixArtist(String mixArtist) {
+			this.mixArtist = mixArtist;
+		}
+
+		public String getEngineer() {
+			return engineer;
+		}
+
+		public void setEngineer(String engineer) {
+			this.engineer = engineer;
 		}
 	}
 	//endregion

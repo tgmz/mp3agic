@@ -407,12 +407,12 @@ public class Mp3FileTest {
 	}
 
 	private Mp3File loadAndCheckTestMp3WithUnicodeFields(Mp3File mp3File) {
-		assertEquals(0x0CA, mp3File.getXingOffset());
-		assertEquals(0x26B, mp3File.getStartOffset());
-		assertEquals(0xBFE, mp3File.getEndOffset());
-		assertFalse(mp3File.hasId3v1Tag());
+		assertEquals(0x0F0, mp3File.getXingOffset());
+		assertEquals(0x291, mp3File.getStartOffset());
+		assertEquals(0xC24, mp3File.getEndOffset());
+		assertTrue(mp3File.hasId3v1Tag());
 		assertTrue(mp3File.hasId3v2Tag());
-		assertFalse(mp3File.hasCustomTag());
+		assertTrue(mp3File.hasCustomTag());
 		return mp3File;
 	}
 

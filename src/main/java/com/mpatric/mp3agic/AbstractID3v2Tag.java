@@ -32,6 +32,9 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public static final String ID_ARTIST = "TPE1";
 	public static final String ID_ALBUM_ARTIST = "TPE2";
 	public static final String ID_CONDUCTOR = "TPE3";
+	public static final String ID_MIX_ARTIST = "TPE4";
+	public static final String ID_LYRICIST = "TEXT";
+	public static final String ID_ENGINEER = "TXXX";
 	public static final String ID_TRACK = "TRCK";
 	public static final String ID_PART_OF_SET = "TPOS";
 	public static final String ID_COMPILATION = "TCMP";
@@ -57,6 +60,9 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public static final String ID_ARTIST_OBSELETE = "TP1";
 	public static final String ID_ALBUM_ARTIST_OBSELETE = "TP2";
 	public static final String ID_CONDUCTOR_OBSELETE = "TPE3";
+	public static final String ID_MIX_ARTIST_OBSELETE = "TPE3";
+	public static final String ID_LYRICIST_OBSELETE = "TXT";
+	public static final String ID_ENGINEER_OBSELETE = "TXXX";
 	public static final String ID_TRACK_OBSELETE = "TRK";
 	public static final String ID_PART_OF_SET_OBSELETE = "TPA";
 	public static final String ID_COMPILATION_OBSELETE = "TCP";
@@ -1018,10 +1024,58 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	@Override
 	public void setConductor(String conductor) {
-		if (conductor != null && conductor.length() > 0) {
+		if (conductor != null && !conductor.isEmpty()) {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(conductor));
 			addFrame(createFrame(ID_CONDUCTOR, frameData.toBytes()), true);
+		}
+	}
+
+	@Override
+	public String getMixArtist() {
+		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_MIX_ARTIST_OBSELETE : ID_MIX_ARTIST);
+		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
+		return null;
+	}
+
+	@Override
+	public void setMixArtist(String mixArtist) {
+		if (mixArtist != null && !mixArtist.isEmpty()) {
+			invalidateDataLength();
+			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(mixArtist));
+			addFrame(createFrame(ID_MIX_ARTIST, frameData.toBytes()), true);
+		}
+	}
+
+	@Override
+	public String getLyricist() {
+		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_LYRICIST_OBSELETE : ID_LYRICIST);
+		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
+		return null;
+	}
+
+	@Override
+	public void setLyricist(String lyricist) {
+		if (lyricist != null && !lyricist.isEmpty()) {
+			invalidateDataLength();
+			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(lyricist));
+			addFrame(createFrame(ID_LYRICIST, frameData.toBytes()), true);
+		}
+	}
+
+	@Override
+	public String getEngineer() {
+		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_ENGINEER_OBSELETE : ID_ENGINEER);
+		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
+		return null;
+	}
+
+	@Override
+	public void setEngineer(String engineer) {
+		if (engineer != null && !engineer.isEmpty()) {
+			invalidateDataLength();
+			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(engineer));
+			addFrame(createFrame(ID_ENGINEER, frameData.toBytes()), true);
 		}
 	}
 

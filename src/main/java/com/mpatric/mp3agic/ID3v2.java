@@ -154,4 +154,16 @@ public interface ID3v2 extends ID3v1 {
 	Map<String, ID3v2FrameSet> getFrameSets();
 
 	void clearFrameSet(String id);
+
+	String getMixArtist();
+
+	void setMixArtist(String mixArtist);
+
+	String getLyricist();
+
+	void setLyricist(String lyricist);
+
+	String getEngineer();
+
+	void setEngineer(String engineer);
 }

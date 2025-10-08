@@ -148,6 +148,10 @@ public class ID3v2TagTest {
 		assertEquals("COPYRIGHT2345678901234567890123", id3tag.getCopyright());
 		assertEquals("URL2345678901234567890123456789", id3tag.getUrl());
 		assertEquals("ENCODER234567890123456789012345", id3tag.getEncoder());
+		assertNull(id3tag.getConductor());
+		assertNull(id3tag.getEngineer());
+		assertNull(id3tag.getLyricist());
+		assertNull(id3tag.getMixArtist());
 		assertEquals(1885, id3tag.getAlbumImage().length);
 		assertEquals("image/png", id3tag.getAlbumImageMimeType());
 	}
@@ -158,7 +162,7 @@ public class ID3v2TagTest {
 		setTagFields(id3tag);
 		byte[] data = id3tag.toBytes();
 		ID3v2 id3tagCopy = new ID3v23Tag(data);
-		assertEquals(2340, data.length);
+		assertEquals(2418, data.length);
 		assertEquals(id3tag, id3tagCopy);
 	}
 
@@ -169,7 +173,7 @@ public class ID3v2TagTest {
 		id3tag.setFooter(true);
 		byte[] data = id3tag.toBytes();
 		ID3v2 id3tagCopy = new ID3v24Tag(data);
-		assertEquals(2350, data.length);
+		assertEquals(2428, data.length);
 		assertEquals(id3tag, id3tagCopy);
 	}
 
@@ -180,7 +184,7 @@ public class ID3v2TagTest {
 		id3tag.setPadding(true);
 		byte[] data = id3tag.toBytes();
 		ID3v2 id3tagCopy = new ID3v24Tag(data);
-		assertEquals(2340 + AbstractID3v2Tag.PADDING_LENGTH, data.length);
+		assertEquals(2418 + AbstractID3v2Tag.PADDING_LENGTH, data.length);
 		assertEquals(id3tag, id3tagCopy);
 	}
 
@@ -191,7 +195,7 @@ public class ID3v2TagTest {
 		id3tag.setFooter(true);
 		id3tag.setPadding(true);
 		byte[] data = id3tag.toBytes();
-		assertEquals(2350, data.length);
+		assertEquals(2428, data.length);
 	}
 
 	@Test
@@ -354,6 +358,9 @@ public class ID3v2TagTest {
 		assertEquals("\u3053\u3093\u306B\u3061\u306F", id3tag.getAlbum()); // japanese
 		assertEquals("\u0AB9\u0AC7\u0AB2\u0ACD\u0AB2\u0ACB", id3tag.getComposer()); // gujarati
 		assertEquals("\u5C0F\u6FA4 \u5F81\u723E", id3tag.getConductor()); // japanese: Seiji Ozawa
+		assertEquals("\u0418\u0433\u043E\u0440\u044C \u0421\u043E\u0440\u043E\u043A\u0438\u043D", id3tag.getEngineer()); // cyrillic: Igor Sorokin 
+		assertEquals("\u042E\u0440\u0438\u0439 \u0428\u0435\u0432\u0447\u0443\u043A", id3tag.getLyricist()); // cyrillic: Juri Schewtschuk
+		assertEquals("\u0412\u0430\u0434\u0438\u043C \u041A\u0443\u0440\u044B\u043B\u0435\u0432", id3tag.getMixArtist()); // cyrillic: Vadim Kurylew
 	}
 
 	@Test
@@ -529,6 +536,10 @@ public class ID3v2TagTest {
 		id3tag.setGenre(0x0d);
 		id3tag.setComment("COMMENT");
 		id3tag.setComposer("COMPOSER");
+		id3tag.setConductor("CONDUCTOR");
+		id3tag.setEngineer("ENGINEER");
+		id3tag.setLyricist("LYRICIST");
+		id3tag.setMixArtist("MIXARTIST");
 		id3tag.setOriginalArtist("ORIGINALARTIST");
 		id3tag.setCopyright("COPYRIGHT");
 		id3tag.setUrl("URL");
