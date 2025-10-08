@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.EnumSet;
 
-public class Mp3File extends FileWrapper {
+public class Mp3agicFile extends FileWrapper {
 
 	private static final int DEFAULT_BUFFER_LENGTH = 65536;
 	private static final int MINIMUM_BUFFER_LENGTH = 40;
@@ -38,48 +38,48 @@ public class Mp3File extends FileWrapper {
 	private byte[] customTag;
 	private boolean scanFile;
 
-	protected Mp3File() {
+	protected Mp3agicFile() {
 	}
 
-	public Mp3File(String filename) throws IOException, UnsupportedTagException, InvalidDataException {
+	public Mp3agicFile(String filename) throws IOException, UnsupportedTagException, InvalidDataException {
 		this(filename, DEFAULT_BUFFER_LENGTH, true);
 	}
 
-	public Mp3File(String filename, int bufferLength) throws IOException, UnsupportedTagException, InvalidDataException {
+	public Mp3agicFile(String filename, int bufferLength) throws IOException, UnsupportedTagException, InvalidDataException {
 		this(filename, bufferLength, true);
 	}
 
-	public Mp3File(String filename, boolean scanFile) throws IOException, UnsupportedTagException, InvalidDataException {
+	public Mp3agicFile(String filename, boolean scanFile) throws IOException, UnsupportedTagException, InvalidDataException {
 		this(filename, DEFAULT_BUFFER_LENGTH, scanFile);
 	}
 
-	public Mp3File(String filename, int bufferLength, boolean scanFile) throws IOException, UnsupportedTagException, InvalidDataException {
+	public Mp3agicFile(String filename, int bufferLength, boolean scanFile) throws IOException, UnsupportedTagException, InvalidDataException {
 		super(filename);
 		init(bufferLength, scanFile);
 	}
 
-	public Mp3File(File file) throws IOException, UnsupportedTagException, InvalidDataException {
+	public Mp3agicFile(File file) throws IOException, UnsupportedTagException, InvalidDataException {
 		this(file, DEFAULT_BUFFER_LENGTH, true);
 	}
 
-	public Mp3File(File file, int bufferLength) throws IOException, UnsupportedTagException, InvalidDataException {
+	public Mp3agicFile(File file, int bufferLength) throws IOException, UnsupportedTagException, InvalidDataException {
 		this(file, bufferLength, true);
 	}
 
-	public Mp3File(File file, int bufferLength, boolean scanFile) throws IOException, UnsupportedTagException, InvalidDataException {
+	public Mp3agicFile(File file, int bufferLength, boolean scanFile) throws IOException, UnsupportedTagException, InvalidDataException {
 		super(file);
 		init(bufferLength, scanFile);
 	}
 
-	public Mp3File(Path path) throws IOException, UnsupportedTagException, InvalidDataException {
+	public Mp3agicFile(Path path) throws IOException, UnsupportedTagException, InvalidDataException {
 		this(path, DEFAULT_BUFFER_LENGTH, true);
 	}
 
-	public Mp3File(Path path, int bufferLength) throws IOException, UnsupportedTagException, InvalidDataException {
+	public Mp3agicFile(Path path, int bufferLength) throws IOException, UnsupportedTagException, InvalidDataException {
 		this(path, bufferLength, true);
 	}
 
-	public Mp3File(Path path, int bufferLength, boolean scanFile) throws IOException, UnsupportedTagException, InvalidDataException {
+	public Mp3agicFile(Path path, int bufferLength, boolean scanFile) throws IOException, UnsupportedTagException, InvalidDataException {
 		super(path);
 		init(bufferLength, scanFile);
 	}
