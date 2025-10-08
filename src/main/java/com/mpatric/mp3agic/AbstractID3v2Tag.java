@@ -38,6 +38,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public static final String ID_LYRICIST = "TEXT";
 	public static final String ID_ENGINEER = "TXXX";
 	public static final String ID_TRACK = "TRCK";
+	public static final String ID_TRACKLENGTH = "TLEN";
 	public static final String ID_PART_OF_SET = "TPOS";
 	public static final String ID_COMPILATION = "TCMP";
 	public static final String ID_CHAPTER_TOC = "CTOC";
@@ -66,6 +67,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public static final String ID_LYRICIST_OBSELETE = "TXT";
 	public static final String ID_ENGINEER_OBSELETE = "TXXX";
 	public static final String ID_TRACK_OBSELETE = "TRK";
+	public static final String ID_TRACKLENGTH_OBSELETE = "TLEN";
 	public static final String ID_PART_OF_SET_OBSELETE = "TPA";
 	public static final String ID_COMPILATION_OBSELETE = "TCP";
 	public static final String ID_GROUPING_OBSELETE = "TT1";
@@ -1078,6 +1080,22 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 			invalidateDataLength();
 			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(engineer));
 			addFrame(createFrame(ID_ENGINEER, frameData.toBytes()), true);
+		}
+	}
+
+	@Override
+	public String getTrackLength() {
+		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_TRACKLENGTH_OBSELETE : ID_TRACKLENGTH);
+		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
+		return null;
+	}
+
+	@Override
+	public void setTrackLength(String trackLength) {
+		if (StringUtils.isNotEmpty(trackLength)) {
+			invalidateDataLength();
+			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(trackLength));
+			addFrame(createFrame(ID_TRACKLENGTH, frameData.toBytes()), true);
 		}
 	}
 

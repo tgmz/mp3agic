@@ -172,7 +172,7 @@ public class ID3v2TagTest {
 		setTagFields(id3tag);
 		byte[] data = id3tag.toBytes();
 		ID3v2 id3tagCopy = new ID3v23Tag(data);
-		assertEquals(2418, data.length);
+		assertEquals(2434, data.length);
 		assertEquals(id3tag, id3tagCopy);
 	}
 
@@ -183,7 +183,7 @@ public class ID3v2TagTest {
 		id3tag.setFooter(true);
 		byte[] data = id3tag.toBytes();
 		ID3v2 id3tagCopy = new ID3v24Tag(data);
-		assertEquals(2428, data.length);
+		assertEquals(2444, data.length);
 		assertEquals(id3tag, id3tagCopy);
 	}
 
@@ -194,7 +194,7 @@ public class ID3v2TagTest {
 		id3tag.setPadding(true);
 		byte[] data = id3tag.toBytes();
 		ID3v2 id3tagCopy = new ID3v24Tag(data);
-		assertEquals(2418 + AbstractID3v2Tag.PADDING_LENGTH, data.length);
+		assertEquals(2434 + AbstractID3v2Tag.PADDING_LENGTH, data.length);
 		assertEquals(id3tag, id3tagCopy);
 	}
 
@@ -205,7 +205,7 @@ public class ID3v2TagTest {
 		id3tag.setFooter(true);
 		id3tag.setPadding(true);
 		byte[] data = id3tag.toBytes();
-		assertEquals(2428, data.length);
+		assertEquals(2444, data.length);
 	}
 
 	@Test
@@ -462,6 +462,17 @@ public class ID3v2TagTest {
 	}
 
 	@Test
+	public void shouldHavePositiveDuration() throws Exception {
+		byte[] buffer = TestHelper.loadFile("src/test/resources/v23tagwithduration.mp3");
+		ID3v2 id3tag = ID3v2TagFactory.createTag(buffer);
+
+		String durationString = id3tag.getTrackLength();
+		
+		assertNotNull(durationString);
+		assertEquals(15_000, Integer.parseInt(durationString));
+	}
+
+	@Test
 	public void shouldReadTagFieldsFromMp3With32tagResavedByMp3tagWithUTF16Encoding() throws Exception {
 		byte[] buffer = TestHelper.loadFile("src/test/resources/v1andv23tagswithalbumimage-utf16le.mp3");
 		ID3v2 id3tag = ID3v2TagFactory.createTag(buffer);
@@ -554,6 +565,7 @@ public class ID3v2TagTest {
 		id3tag.setEngineer("ENGINEER");
 		id3tag.setLyricist("LYRICIST");
 		id3tag.setMixArtist("MIXARTIST");
+		id3tag.setTrackLength("15000");
 		id3tag.setOriginalArtist("ORIGINALARTIST");
 		id3tag.setCopyright("COPYRIGHT");
 		id3tag.setUrl("URL");

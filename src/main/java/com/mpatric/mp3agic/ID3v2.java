@@ -166,4 +166,8 @@ public interface ID3v2 extends ID3v1 {
 	String getEngineer();
 
 	void setEngineer(String engineer);
+
+	String getTrackLength();
+
+	void setTrackLength(String trackLength);
 }

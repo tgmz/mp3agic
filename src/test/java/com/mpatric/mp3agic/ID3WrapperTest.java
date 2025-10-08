@@ -1089,6 +1089,7 @@ public class ID3WrapperTest {
 		private byte[] albumImage;
 		private String albumImageMimeType;
 		private String lyrics;
+		private String trackLength;
 		private final Map<String, ID3v2FrameSet> frameSets = new HashMap<>();
 
 		@Override
@@ -1473,6 +1474,14 @@ public class ID3WrapperTest {
 
 		public void setEngineer(String engineer) {
 			this.engineer = engineer;
+		}
+
+		public String getTrackLength() {
+			return trackLength;
+		}
+
+		public void setTrackLength(String trackLength) {
+			this.trackLength = trackLength;
 		}
 	}
 	//endregion
