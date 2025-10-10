@@ -36,7 +36,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public static final String ID_CONDUCTOR = "TPE3";
 	public static final String ID_MIX_ARTIST = "TPE4";
 	public static final String ID_LYRICIST = "TEXT";
-	public static final String ID_ENGINEER = "TXXX";
+	public static final String ID_INVOLVED = "TIPL";
 	public static final String ID_TRACK = "TRCK";
 	public static final String ID_TRACKLENGTH = "TLEN";
 	public static final String ID_PART_OF_SET = "TPOS";
@@ -65,7 +65,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public static final String ID_CONDUCTOR_OBSELETE = "TPE3";
 	public static final String ID_MIX_ARTIST_OBSELETE = "TPE3";
 	public static final String ID_LYRICIST_OBSELETE = "TXT";
-	public static final String ID_ENGINEER_OBSELETE = "TXXX";
+	public static final String ID_INVOLVED_OBSELETE = "TIPL";
 	public static final String ID_TRACK_OBSELETE = "TRK";
 	public static final String ID_TRACKLENGTH_OBSELETE = "TLEN";
 	public static final String ID_PART_OF_SET_OBSELETE = "TPA";
@@ -1068,18 +1068,18 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	}
 
 	@Override
-	public String getEngineer() {
-		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_ENGINEER_OBSELETE : ID_ENGINEER);
+	public String getInvolved() {
+		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_INVOLVED_OBSELETE : ID_INVOLVED);
 		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
 		return null;
 	}
 
 	@Override
-	public void setEngineer(String engineer) {
-		if (StringUtils.isNotEmpty(engineer)) {
+	public void setInvolved(String involved) {
+		if (StringUtils.isNotEmpty(involved)) {
 			invalidateDataLength();
-			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(engineer));
-			addFrame(createFrame(ID_ENGINEER, frameData.toBytes()), true);
+			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(involved));
+			addFrame(createFrame(ID_INVOLVED, frameData.toBytes()), true);
 		}
 	}
 

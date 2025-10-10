@@ -1080,7 +1080,7 @@ public class ID3WrapperTest {
 		private String conductor;
 		private String lyricist;
 		private String mixArtist;
-		private String engineer;
+		private String involved;
 		private String originalArtist;
 		private String albumArtist;
 		private String copyright;
@@ -1468,12 +1468,12 @@ public class ID3WrapperTest {
 			this.mixArtist = mixArtist;
 		}
 
-		public String getEngineer() {
-			return engineer;
+		public String getInvolved() {
+			return involved;
 		}
 
-		public void setEngineer(String engineer) {
-			this.engineer = engineer;
+		public void setInvolved(String involved) {
+			this.involved = involved;
 		}
 
 		public String getTrackLength() {

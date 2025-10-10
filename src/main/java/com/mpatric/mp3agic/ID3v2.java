@@ -163,9 +163,9 @@ public interface ID3v2 extends ID3v1 {
 
 	void setLyricist(String lyricist);
 
-	String getEngineer();
+	String getInvolved();
 
-	void setEngineer(String engineer);
+	void setInvolved(String involved);
 
 	String getTrackLength();
 

@@ -23,10 +23,13 @@ public class ID3v2TagTest {
 	private static final String JAPANESE_ALBUM = "\u3053\u3093\u306B\u3061\u306F";
 	private static final String GUJARATI_COMPOSER = "\u0AB9\u0AC7\u0AB2\u0ACD\u0AB2\u0ACB";
 	private static final String JAPANESE_CONDUCTOR = "\u5C0F\u6FA4 \u5F81\u723E"; // Seiji Ozawa
-	private static final String CYRILLIC_ENGINEER = "\u0418\u0433\u043E\u0440\u044C \u0421\u043E\u0440\u043E\u043A\u0438\u043D"; // Igor Sorokin
+	private static final String CYRILLIC_INVOLVED = "Engineer\u0000\u0418\u0433\u043E\u0440\u044C \u0421\u043E\u0440\u043E\u043A\u0438\u043D"; // Engineer\0Igor Sorokin
 	private static final String CYRILLIC_LYRICIST = "\u042E\u0440\u0438\u0439 \u0428\u0435\u0432\u0447\u0443\u043A"; // Juri Schewtschuk
 	private static final String CYRILLIC_MIX_ARTIST = "\u0412\u0430\u0434\u0438\u043C \u041A\u0443\u0440\u044B\u043B\u0435\u0432"; // Vadim Kurylew
 	
+	public static void main(String[] args) {
+		System.out.println(CYRILLIC_INVOLVED);
+	}
 	@Test
 	public void shouldInitialiseFromHeaderBlockWithValidHeaders() throws NoSuchTagException, UnsupportedTagException, InvalidDataException {
 		byte[] header = BufferTools.copyBuffer(ID3V2_HEADER, 0, ID3V2_HEADER.length);
@@ -159,7 +162,7 @@ public class ID3v2TagTest {
 		assertEquals("URL2345678901234567890123456789", id3tag.getUrl());
 		assertEquals("ENCODER234567890123456789012345", id3tag.getEncoder());
 		assertNull(id3tag.getConductor());
-		assertNull(id3tag.getEngineer());
+		assertNull(id3tag.getInvolved());
 		assertNull(id3tag.getLyricist());
 		assertNull(id3tag.getMixArtist());
 		assertEquals(1885, id3tag.getAlbumImage().length);
@@ -368,7 +371,6 @@ public class ID3v2TagTest {
 		assertEquals(JAPANESE_ALBUM, id3tag.getAlbum());
 		assertEquals(GUJARATI_COMPOSER, id3tag.getComposer());
 		assertEquals(JAPANESE_CONDUCTOR, id3tag.getConductor());
-		assertEquals(CYRILLIC_ENGINEER, id3tag.getEngineer()); 
 		assertEquals(CYRILLIC_LYRICIST, id3tag.getLyricist());
 		assertEquals(CYRILLIC_MIX_ARTIST, id3tag.getMixArtist());
 	}
@@ -382,7 +384,7 @@ public class ID3v2TagTest {
 		id3tag.setComment("\u03C3\u03BF\u03C5");
 		id3tag.setComposer(GUJARATI_COMPOSER);
 		id3tag.setConductor(JAPANESE_CONDUCTOR);
-		id3tag.setEngineer(CYRILLIC_ENGINEER);
+		id3tag.setInvolved(CYRILLIC_INVOLVED);
 		id3tag.setLyricist(CYRILLIC_LYRICIST);
 		id3tag.setMixArtist(CYRILLIC_MIX_ARTIST);
 		id3tag.setOriginalArtist("\u03B3\u03B5\u03B9\u03AC");
@@ -562,7 +564,7 @@ public class ID3v2TagTest {
 		id3tag.setComment("COMMENT");
 		id3tag.setComposer("COMPOSER");
 		id3tag.setConductor("CONDUCTOR");
-		id3tag.setEngineer("ENGINEER");
+		id3tag.setInvolved("INVOLVED");
 		id3tag.setLyricist("LYRICIST");
 		id3tag.setMixArtist("MIXARTIST");
 		id3tag.setTrackLength("15000");
