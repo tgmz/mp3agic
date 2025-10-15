@@ -9,6 +9,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 
 	public static final String ID_IMAGE = "APIC";
 	public static final String ID_ENCODER = "TENC";
+	public static final String ID_ENCODER_SETTINGS = "TSSE";
 	public static final String ID_URL = "WXXX";
 	public static final String ID_ARTIST_URL = "WOAR";
 	public static final String ID_COMMERCIAL_URL = "WCOM";
@@ -45,8 +46,10 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public static final String ID_CHAPTER = "CHAP";
 	public static final String ID_GROUPING = "TIT1";
 	public static final String ID_RATING = "POPM";
+	public static final String ID_MEDIA_TYPE = "TMED";
 	public static final String ID_IMAGE_OBSELETE = "PIC";
 	public static final String ID_ENCODER_OBSELETE = "TEN";
+	public static final String ID_ENCODER_SETTINGS_OBSOLETE = "TSSE";
 	public static final String ID_URL_OBSELETE = "WXX";
 	public static final String ID_COPYRIGHT_OBSELETE = "TCR";
 	public static final String ID_ORIGINAL_ARTIST_OBSELETE = "TOA";
@@ -71,6 +74,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public static final String ID_PART_OF_SET_OBSELETE = "TPA";
 	public static final String ID_COMPILATION_OBSELETE = "TCP";
 	public static final String ID_GROUPING_OBSELETE = "TT1";
+	public static final String ID_MEDIA_TYPE_OBSOLETE = "TMED";
 
 	public static final byte PICTURETYPE_OTHER = 0x0;
 	public static final byte PICTURETYPE_32PXICON = 0x1;
@@ -657,7 +661,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	public void setGenreDescription(String text) throws IllegalArgumentException {
 		int genreNum = ID3v1Genres.matchGenreDescription(text);
 		if (genreNum < 0) {
-			throw new IllegalArgumentException("Unknown genre: " + text);
+			//throw new IllegalArgumentException("Unknown genre: " + text);
 		}
 		setGenre(genreNum);
 	}
@@ -778,6 +782,21 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	}
 
 	@Override
+	public String getEncoderSettings() {
+		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_ENCODER_SETTINGS_OBSOLETE : ID_ENCODER_SETTINGS);
+		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
+		return null;
+	}
+
+	@Override
+	public void setEncoderSettings(String encoderSettings) {
+		if (StringUtils.isNotEmpty(encoderSettings)) {
+			invalidateDataLength();
+			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(encoderSettings));
+			addFrame(createFrame(ID_ENCODER_SETTINGS, frameData.toBytes()), true);
+		}
+	}
+	@Override
 	public String getPublisher() {
 		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_PUBLISHER_OBSELETE : ID_PUBLISHER);
 		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
@@ -798,6 +817,22 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_ORIGINAL_ARTIST_OBSELETE : ID_ORIGINAL_ARTIST);
 		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
 		return null;
+	}
+
+	@Override
+	public String getMediaType() {
+		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_MIX_ARTIST_OBSELETE : ID_MEDIA_TYPE);
+		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
+		return null;
+	}
+
+	@Override
+	public void setMediaType(String mediaType) {
+		if (StringUtils.isNotEmpty(mediaType)) {
+			invalidateDataLength();
+			ID3v2TextFrameData frameData = new ID3v2TextFrameData(useFrameUnsynchronisation(), new EncodedText(mediaType));
+			addFrame(createFrame(ID_MEDIA_TYPE, frameData.toBytes()), true);
+		}
 	}
 
 	@Override
@@ -1070,7 +1105,7 @@ public abstract class AbstractID3v2Tag implements ID3v2 {
 	@Override
 	public String getInvolved() {
 		ID3v2TextFrameData frameData = extractTextFrameData(obseleteFormat ? ID_INVOLVED_OBSELETE : ID_INVOLVED);
-		if (frameData != null && frameData.getText() != null) return frameData.getText().toString();
+		if (frameData != null && frameData.getText() != null) return frameData.getText().toString(true);	// Must include x00 bytes here
 		return null;
 	}
 

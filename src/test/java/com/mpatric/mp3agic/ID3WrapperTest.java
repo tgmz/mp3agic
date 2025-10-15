@@ -860,6 +860,53 @@ public class ID3WrapperTest {
 	}
 	//endregion
 
+	//region enhancements
+	@Test
+	public void getEnhancementsV2Tags() {
+		ID3v1 id3v1Tag = new ID3v1TagForTesting();
+		ID3v2 id3v2Tag = new ID3v2TagForTesting();
+		
+		id3v2Tag.setLyricist("Lyricicst");
+		id3v2Tag.setConductor("Conductor");
+		id3v2Tag.setMixArtist("MixArtist");
+		id3v2Tag.setPublisher("Publisher");
+		id3v2Tag.setInvolved("Involved");
+		id3v2Tag.setPartOfSet("PartOfSet");
+		id3v2Tag.setTrackLength("TrackLength");
+		id3v2Tag.setEncoderSettings("EncoderSettings");
+		id3v2Tag.setCompilation(true);
+
+		ID3Wrapper w = new ID3Wrapper(id3v1Tag, id3v2Tag);
+		
+		assertEquals("Lyricicst", w.getLyricist());
+		assertEquals("Conductor", w.getConductor());
+		assertEquals("MixArtist", w.getMixArtist());
+		assertEquals("Publisher", w.getPublisher());
+		assertEquals("Involved" , w.getInvolved());
+		assertEquals("PartOfSet", w.getPartOfSet());
+		assertEquals("TrackLength", w.getTrackLength());
+		assertEquals("EncoderSettings", w.getEncoderSettings());
+		assertTrue(w.isCompilation());
+
+	}
+
+	@Test
+	public void getEnhancementsReturnsNullIfV2TagDoesNotExist() {
+		ID3v1 id3v1Tag = new ID3v1TagForTesting();
+		ID3Wrapper w = new ID3Wrapper(id3v1Tag, null);
+		
+		assertNull(w.getLyricist());
+		assertNull(w.getConductor());
+		assertNull(w.getMixArtist());
+		assertNull(w.getPublisher());
+		assertNull(w.getInvolved());
+		assertNull(w.getPartOfSet());
+		assertNull(w.getTrackLength());
+		assertNull(w.getEncoderSettings());
+		assertFalse(w.isCompilation());
+	}
+	//endregion
+
 	//region setAlbumImage
 	@Test
 	public void setsAlbumImageOnV2Tag() {
@@ -912,6 +959,52 @@ public class ID3WrapperTest {
 		ID3v1 id3v1Tag = new ID3v1TagForTesting();
 		ID3Wrapper wrapper = new ID3Wrapper(id3v1Tag, null);
 		wrapper.setLyrics("lyrics");
+	}
+	//endregion
+
+	//region enhancements
+	
+	@Test
+	public void setsEnhancementsOnV2Tag() {
+		ID3v1 id3v1Tag = new ID3v1TagForTesting();
+		ID3v2 id3v2Tag = new ID3v2TagForTesting();
+		ID3Wrapper w = new ID3Wrapper(id3v1Tag, id3v2Tag);
+		
+		w.setLyricist("Lyricicst");
+		w.setConductor("Conductor");
+		w.setMixArtist("MixArtist");
+		w.setPublisher("Publisher");
+		w.setInvolved("Involved");
+		w.setPartOfSet("PartOfSet");
+		w.setTrackLength("TrackLength");
+		w.setEncoderSettings("EncoderSettings");
+		w.setCompilation(true);
+		
+		assertEquals("Lyricicst", id3v2Tag.getLyricist());
+		assertEquals("Conductor", id3v2Tag.getConductor());
+		assertEquals("MixArtist", id3v2Tag.getMixArtist());
+		assertEquals("Publisher", id3v2Tag.getPublisher());
+		assertEquals("Involved" , id3v2Tag.getInvolved());
+		assertEquals("PartOfSet", id3v2Tag.getPartOfSet());
+		assertEquals("TrackLength", id3v2Tag.getTrackLength());
+		assertEquals("EncoderSettings", id3v2Tag.getEncoderSettings());
+		assertTrue(id3v2Tag.isCompilation());
+	}
+
+	@Test(expected = None.class)
+	public void setEnhancementsDoesNotThrowExceptionWhenV2TagDoesNotExist() {
+		ID3v1 id3v1Tag = new ID3v1TagForTesting();
+		ID3Wrapper w = new ID3Wrapper(id3v1Tag, null);
+		
+		w.setLyricist("Lyricicst");
+		w.setConductor("Conductor");
+		w.setMixArtist("MixArtist");
+		w.setPublisher("Publisher");
+		w.setInvolved("Involved");
+		w.setPartOfSet("PartOfSet");
+		w.setTrackLength("TrackLength");
+		w.setEncoderSettings("EncoderSettings");
+		w.setCompilation(true);
 	}
 	//endregion
 
@@ -1077,6 +1170,8 @@ public class ID3WrapperTest {
 	//region ID3v2TagForTesting class
 	private static class ID3v2TagForTesting extends ID3v1TagForTesting implements ID3v2 {
 		private String composer;
+		private String mediaType;
+		private String encoderSettings;
 		private String conductor;
 		private String lyricist;
 		private String mixArtist;
@@ -1090,6 +1185,9 @@ public class ID3WrapperTest {
 		private String albumImageMimeType;
 		private String lyrics;
 		private String trackLength;
+		private String publisher;
+		private String partOfSet;
+		private boolean compilation;
 		private final Map<String, ID3v2FrameSet> frameSets = new HashMap<>();
 
 		@Override
@@ -1182,16 +1280,7 @@ public class ID3WrapperTest {
 		public void setConductor(String conductor) {
 			this.conductor = conductor;
 		}
-		@Override
-		public String getPublisher() {
-			return null;
-		}
-
-		@Override
-		public void setPublisher(String publisher) {
-			// Irrelvant
-		}
-
+		
 		@Override
 		public String getOriginalArtist() {
 			return originalArtist;
@@ -1310,26 +1399,6 @@ public class ID3WrapperTest {
 		@Override
 		public void setUrl(String url) {
 			this.url = url;
-		}
-
-		@Override
-		public String getPartOfSet() {
-			return null;
-		}
-
-		@Override
-		public void setPartOfSet(String partOfSet) {
-			// Irrelvant
-		}
-
-		@Override
-		public boolean isCompilation() {
-			return false;
-		}
-
-		@Override
-		public void setCompilation(boolean compilation) {
-			// Irrelvant
 		}
 
 		@Override
@@ -1482,6 +1551,46 @@ public class ID3WrapperTest {
 
 		public void setTrackLength(String trackLength) {
 			this.trackLength = trackLength;
+		}
+
+		public String getEncoderSettings() {
+			return encoderSettings;
+		}
+
+		public void setEncoderSettings(String encoderSettings) {
+			this.encoderSettings = encoderSettings;
+		}
+
+		public String getMediaType() {
+			return mediaType;
+		}
+
+		public void setMediaType(String mediaType) {
+			this.mediaType = mediaType;
+		}
+
+		public String getPublisher() {
+			return publisher;
+		}
+
+		public void setPublisher(String publisher) {
+			this.publisher = publisher;
+		}
+
+		public String getPartOfSet() {
+			return partOfSet;
+		}
+
+		public void setPartOfSet(String partOfSet) {
+			this.partOfSet = partOfSet;
+		}
+
+		public boolean isCompilation() {
+			return compilation;
+		}
+
+		public void setCompilation(boolean compilation) {
+			this.compilation = compilation;
 		}
 	}
 	//endregion

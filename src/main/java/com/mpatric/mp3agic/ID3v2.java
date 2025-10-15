@@ -170,4 +170,12 @@ public interface ID3v2 extends ID3v1 {
 	String getTrackLength();
 
 	void setTrackLength(String trackLength);
+
+	String getEncoderSettings();
+
+	void setEncoderSettings(String encoderSettings);
+
+	String getMediaType();
+
+	void setMediaType(String mediaType);
 }

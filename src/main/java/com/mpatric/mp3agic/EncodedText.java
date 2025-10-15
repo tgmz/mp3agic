@@ -194,12 +194,17 @@ public class EncodedText {
 
 	@Override
 	public String toString() {
+		return toString(false);
+	}
+	
+	public String toString(boolean includeNullBytes) {
 		try {
-			return bytesToString(value, characterSetForTextEncoding(textEncoding));
+			return bytesToString(value, characterSetForTextEncoding(textEncoding), includeNullBytes);
 		} catch (CharacterCodingException e) {
 			return null;
 		}
 	}
+	
 
 	public String getCharacterSet() {
 		return characterSetForTextEncoding(textEncoding);
@@ -230,12 +235,12 @@ public class EncodedText {
 		return true;
 	}
 
-	private static String bytesToString(byte[] bytes, String characterSet) throws CharacterCodingException {
+	private static String bytesToString(byte[] bytes, String characterSet, boolean includeNullBytes) throws CharacterCodingException {
 		CharBuffer cbuf = bytesToCharBuffer(bytes, characterSet);
 		String s = cbuf.toString();
-		int length = s.indexOf(0);
-		if (length == -1) return s;
-		return s.substring(0, length);
+		int idxTerminator = includeNullBytes ? -1 : s.indexOf(0);
+		if (idxTerminator == -1) return s;
+		return s.substring(0, idxTerminator);
 	}
 
 	protected static CharBuffer bytesToCharBuffer(byte[] bytes, String characterSet) throws CharacterCodingException {

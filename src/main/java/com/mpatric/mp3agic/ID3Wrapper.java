@@ -94,6 +94,12 @@ public class ID3Wrapper {
 		}
 	}
 
+	public void setGenreDescription(String genreDescription) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setGenreDescription(genreDescription);
+		}
+	}
+
 	public String getYear() {
 		if (id3v2Tag != null && id3v2Tag.getYear() != null && !id3v2Tag.getYear().isEmpty()) {
 			return id3v2Tag.getYear();
@@ -299,6 +305,146 @@ public class ID3Wrapper {
 	public void clearEncoder() {
 		if (id3v2Tag != null) {
 			id3v2Tag.clearFrameSet(AbstractID3v2Tag.ID_ENCODER);
+		}
+	}
+	
+	public void setLyricist(String lyricist) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setLyricist(lyricist);
+		}
+	}
+
+	public String getLyricist() {
+		if (id3v2Tag != null) {
+			return id3v2Tag.getLyricist();
+		} else {
+			return null;
+		}
+	}
+	
+	public void setConductor(String conductor) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setConductor(conductor);
+		}
+	}
+
+	public String getConductor() {
+		if (id3v2Tag != null) {
+			return id3v2Tag.getConductor();
+		} else {
+			return null;
+		}
+	}
+	
+	public void setMixArtist(String mixArtist) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setMixArtist(mixArtist);
+		}
+	}
+
+	public String getMixArtist() {
+		if (id3v2Tag != null) {
+			return id3v2Tag.getMixArtist();
+		} else {
+			return null;
+		}
+	}
+
+	public void setMediaType(String mediaType) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setMediaType(mediaType);
+		}
+	}
+
+	public String getMediaType() {
+		if (id3v2Tag != null) {
+			return id3v2Tag.getMediaType();
+		} else {
+			return null;
+		}
+	}
+
+	public void setPublisher(String publisher) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setPublisher(publisher);
+		}
+	}
+
+	public String getPublisher() {
+		if (id3v2Tag != null) {
+			return id3v2Tag.getPublisher();
+		} else {
+			return null;
+		}
+	}
+
+	public void setInvolved(String involved) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setInvolved(involved);
+		}
+	}
+
+	public String getInvolved() {
+		if (id3v2Tag != null) {
+			return id3v2Tag.getInvolved();
+		} else {
+			return null;
+		}
+	}
+
+	public void setPartOfSet(String partOfSet) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setPartOfSet(partOfSet);
+		}
+	}
+
+	public String getPartOfSet() {
+		if (id3v2Tag != null) {
+			return id3v2Tag.getPartOfSet();
+		} else {
+			return null;
+		}
+	}
+
+	public void setTrackLength(String trackLength) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setTrackLength(trackLength);
+		}
+	}
+
+	public String getTrackLength() {
+		if (id3v2Tag != null) {
+			return id3v2Tag.getTrackLength();
+		} else {
+			return null;
+		}
+	}
+
+	public void setEncoderSettings(String encoderSettings) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setEncoderSettings(encoderSettings);
+		}
+	}
+
+	public String getEncoderSettings() {
+		if (id3v2Tag != null) {
+			return id3v2Tag.getEncoderSettings();
+		} else {
+			return null;
+		}
+	}
+
+	public void setCompilation(boolean compilation) {
+		if (id3v2Tag != null) {
+			id3v2Tag.setCompilation(compilation);
+		}
+	}
+
+	public boolean isCompilation() {
+		if (id3v2Tag != null) {
+			return id3v2Tag.isCompilation();
+		} else {
+			return false;
 		}
 	}
 }
